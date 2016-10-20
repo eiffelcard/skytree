@@ -67,6 +67,24 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
+    public function addnew()
+    {
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+
+              //return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'UserSettings','action'=>'pic2']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+
     /**
      * Edit method
      *
@@ -112,4 +130,25 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function login()
+    {
+      $user = $this->Auth->identify(); // Postされたユーザー名とパスワードをもとにデータベースを検索。ユーザー名とパスワードに該当するユーザーがreturnされる
+
+    if ($user) { // 該当するユーザーがいればログイン処理
+        $this->Auth->setUser($user);
+        return $this->Auth->redirectUrl();
+    } else { // 該当するユーザーがいなければエラー
+      echo ('メールアドレスかパスワードが間違っています');
+    }
+    }
+
+    public function logout()
+    {
+        $this->request->session()->destroy(); // セッションの破棄
+        return $this->redirect($this->Auth->logout()); // ログアウト処理
+    }
+
+
+
 }

@@ -1,24 +1,22 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $userSetting->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $userSetting->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List User Settings'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="userSettings form large-9 medium-8 columns content">
-    <?= $this->Form->create($userSetting) ?>
+<div class="row">
+    <div class="col-xs-12 ">
+      <div class="btn-group btn-group-justified">
+        <?= $this->Html->link(__('ホーム'), ['controller' => 'Hello', 'action' => 'main'],['class'=>"btn btn-primary"]) ?>
+        <?= $this->Html->link(__('友だち'), ['controller' => 'UserSettings', 'action' => 'index2'],['class'=>"btn btn-primary"]) ?>
+          <?= $this->Html->link(__('カード'), ['controller' => 'ProductMasters', 'action' => 'index2'],['class'=>"btn btn-primary"]) ?>
+          <?= $this->Html->link(__('設定'), ['controller' => 'Hello', 'action' => 'setting'],['class'=>"btn btn-success"]) ?>
+      </div>
+
+      <div class="col-xs-12 ">
+<?= $this->Form->create($userSetting, array('type' => 'file', 'enctype' => 'multipart/form-data'));?>
     <fieldset>
         <legend><?= __('Edit User Setting') ?></legend>
+  <td><?=($this->Html->image(h($userSetting->picture),array('alt'=>'CakePHP','height'=>'200','width'=>'400'))); ?></td>
+
         <?php
             echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('picture');
+              echo $this->Form->input('file',
+            array('type'=>'file','label'=>'写真'));
             echo $this->Form->input('display_name');
             echo $this->Form->input('firstname_local');
             echo $this->Form->input('lastname_local');

@@ -27,6 +27,17 @@ class UserSettingsController extends AppController
         $this->set('_serialize', ['userSettings']);
     }
 
+    public function index2()
+    {
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
+        $userSettings = $this->paginate($this->UserSettings);
+
+        $this->set(compact('userSettings'));
+        $this->set('_serialize', ['userSettings']);
+    }
+
     /**
      * View method
      *
@@ -171,7 +182,7 @@ class UserSettingsController extends AppController
 
         if ($this->UserSettings->save($userSetting)) {
             $this->Flash->success(__('The user setting has been saved.'));
-          return $this->redirect(['action' => 'index']);
+          return $this->redirect(['controller' => 'Hello','action'=>'ready']);
         } else {
             $this->Flash->error(__('The user setting could not be saved. Please, try again.'));
         }

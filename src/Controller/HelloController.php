@@ -8,7 +8,7 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\ProductMastersTable $ProductMasters
  */
-class ProductMastersController extends AppController
+class HelloController extends AppController
 {
 
     /**
@@ -18,12 +18,28 @@ class ProductMastersController extends AppController
      */
     public function index()
     {
-        $productMasters = $this->paginate($this->ProductMasters);
 
-        $this->set(compact('productMasters'));
-        $this->set('_serialize', ['productMasters']);
     }
 
+    public function welcome()
+    {
+
+    }
+
+    public function ready()
+    {
+
+    }
+
+    public function main()
+    {
+
+    }
+
+    public function setting()
+    {
+
+    }
     /**
      * View method
      *
@@ -31,21 +47,9 @@ class ProductMastersController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
-        $productMaster = $this->ProductMasters->get($id, [
-            'contain' => []
-        ]);
 
-        $this->set('productMaster', $productMaster);
-        $this->set('_serialize', ['productMaster']);
-    }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
+
     public function add()
     {
         $productMaster = $this->ProductMasters->newEntity();
@@ -140,19 +144,12 @@ class ProductMastersController extends AppController
 
           if ($this->ProductMasters->save($productMaster)) {
             $this->Flash->success(__('The productmaster has been saved.'));
-          return $this->redirect(['action' => 'index2']);
+          return $this->redirect(['action' => 'index']);
         } else {
             $this->Flash->error(__('The productmaster could not be saved. Please, try again.'));
         }
     }
   }
 
-  public function index2()
-  {
-      $productMasters = $this->paginate($this->ProductMasters);
-
-      $this->set(compact('productMasters'));
-      $this->set('_serialize', ['productMasters']);
-  }
 
 }

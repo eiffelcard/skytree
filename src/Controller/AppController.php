@@ -40,10 +40,33 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
+        $this->viewBuilder()->layout('skytree');
+        $this->set('header', 'Skytree');
+    $this->set('footer', 'copyright forsisters');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+      /*  $this->loadComponent('Auth', [ // Authコンポーネントの読み込み
+                   'authenticate' => [
+                       'Form' => [ // 認証の種類を指定。Form,Basic,Digestが使える。デフォルトはForm
+                                            'fields' => [ // ユーザー名とパスワードに使うカラムの指定。省略した場合はusernameとpasswordになる
+                                            'username' => 'email', // ユーザー名のカラムを指定
+                                            'password' => 'password' //パスワードに使うカラムを指定
+                                                        ]
+                                                      ]
+                                                    ],
+            'loginRedirect' => [ // ログイン後に遷移するアクションを指定
+              'controller' => 'Users',
+              'action' => 'edit'
+          ],
+          'logoutRedirect' => [ // ログアウト後に遷移するアクションを指定
+              'controller' => 'Users',
+              'action' => 'login',
+          ],
+          'authError' => 'ログインできませんでした。ログインしてください。', // ログインに失敗したときのFlashメッセージを指定(省略可)
+        ]);*/
     }
+
+
 
     /**
      * Before render callback.
